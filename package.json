@@ -1,19 +1,44 @@
 {
   "name": "prompt-library-mcp",
-  "module": "index.ts",
+  "version": "2025.0.6",
+  "description": "MCP Server to Host Reusable Prompts",
+  "author": "Sean Missingham",
+  "license": "MIT",
+  "homepage": "https://github.com/smissingham/prompt-library-mcp",
   "type": "module",
-  "private": true,
+  "bin": {
+    "prompt-library-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "default_prompts"
+  ],
   "scripts": {
-    "start": "bun index.ts",
-    "dev": "bun --watch ."
+    "clean": "rm -rf dist node_modules logs && mkdir logs && touch logs/server.log && bun install",
+    "predev": "bun install",
+    "dev": "bun --watch ./src",
+    "dist": "bun build ./src/index.ts --outdir dist --target node --minify",
+    "pub": "bun run dist && npm publish"
+  },
+  "keywords": [
+    "mcp",
+    "prompts",
+    "library"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "zod": "^4.0.14"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/node": "^24.2.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
   },
-  "peerDependencies": {
-    "typescript": "^5"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smissingham/prompt-library-mcp"
   },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.2"
+  "engines": {
+    "node": ">=20"
   }
 }

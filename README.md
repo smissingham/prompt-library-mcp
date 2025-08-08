@@ -1,92 +1,55 @@
 # Prompt Library MCP Server
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![TypeScript](https://img.shields.io/badge/typescript-%3E%3D5.0-blue)
-![Bun](https://img.shields.io/badge/bun-%3E=1.0-orange)
+## Current Functionality
 
-A Model Context Protocol (MCP) server that serves prompts from a local markdown file library, enabling AI tools to access and utilize standardized prompts.
+- Provide a filepath, all markdown files will be read and served as prompts
+- Nested files will prepend their folder names, with hyphens, as the prompt name
+- One default meta prompt, to help create other prompts
 
-## Features
-
-- Serves prompts stored as markdown files
-- Supports nested directory organization for prompts
-- Integrates with MCP-compatible tools and applications
-- Simple file-based prompt management
-- Real-time prompt discovery and retrieval
-
-## Installation
-
-### Prerequisites
-
-- [Bun](https://bun.sh/) (v1.0 or higher)
-- Node.js and npm (for development)
-
-### Setup
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd prompt-library-mcp
-```
-
-2. Install dependencies:
-```bash
-bun install
-```
-
-## Usage
-
-### Running the Server
-
-To start the server in production mode:
-```bash
-bun start
-```
-
-To run in development mode with file watching:
-```bash
-bun dev
-```
-
-### Adding Prompts
-
-Add your prompts as markdown files in the `prompts/` directory:
+### Prompt Library Directory Example
 ```
 prompts/
 ├── my-prompt.md
 ├── another-prompt.md
+├── ignored-file.somethingElse
 └── category/
     └── specialized-prompt.md
 ```
 
-Each markdown file should contain the prompt content in plain text. The filename (without extension) becomes the prompt name when querying via MCP.
+## Future Features
 
-### Environment Variables
+- More default prompts
+- MCP Tools for Creation & Modification of Prompts
+- Prompt variable support
+- Prompt frontmatter descriptors
+- Live Reload of Prompts List 
+    - This is already implemented by server, but probably not by clients
 
-- `LIBRARY_PATH`: Path to the prompts directory (default: "prompts")
-- `SERVER_LOG`: Path to log file (default: "server.log")
-- `SERVER_NAME`: Server name identifier (default: "prompt-library")
+# Installation
 
-## API
+Note, all env vars are optional, but at least one is required to get prompts
 
-The server implements the Model Context Protocol and responds to:
+## Cursor
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=prompt-library&config=JTdCJTIyY29tbWFuZCUyMiUzQSUyMm5weCUyMC15JTIwcHJvbXB0LWxpYnJhcnktbWNwJTQwbGF0ZXN0JTIyJTJDJTIyZW52JTIyJTNBJTdCJTIyTElCUkFSWV9QQVRIJTIyJTNBJTIyJTJGcGF0aCUyRnRvJTJGeW91ciUyRnN0b3JlZCUyRnByb21wdHMlMjIlMkMlMjJERUZBVUxUX1BST01QVFMlMjIlM0ElMjJmYWxzZSUyMiUyQyUyMlNFUlZFUl9OQU1FJTIyJTNBJTIyT3B0aW9uYWwlM0ElMjBPdmVyd3JpdGUlMjBNQ1AlMjBTZXJ2ZXIlMjBOYW1lJTIyJTJDJTIyU0VSVkVSX0xPRyUyMiUzQSUyMiUyRnBhdGglMkZ0byUyRmxvZyUyRmZpbGUlMkZpcyUyRm9wdGlvbmFsJTIyJTdEJTdE)
 
-- `prompts/list`: Lists available prompts
-- `prompts/get`: Retrieves a specific prompt by name
 
-## Contributing
+## Other MCP Client
+```json
+{
+  "PromptLibrary": {
+    "command": "npx",
+    "args": [
+        "-y",
+        "prompt-library-mcp@latest"
+    ],
+    "env": {
+        "LIBRARY_PATH": "/path/to/your/stored/prompts",
+        "DEFAULT_PROMPTS": "false",
+        "SERVER_NAME": "Optional: Overwrite MCP Server Name",
+        "SERVER_LOG": "/path/to/log/file/is/optional"
+    }
+  }
+}
+```
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Built with [Model Context Protocol SDK](https://github.com/modelcontextprotocol/sdk)
-
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development instructions.

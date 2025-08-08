@@ -1,4 +1,6 @@
-**/.direnv/*
-**/node_modules/*
-
-server.log
+.direnv
+node_modules
+dist
+*.tgz
+logs/*
+logs/server.log
